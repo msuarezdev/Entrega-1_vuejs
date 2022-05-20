@@ -1,32 +1,32 @@
 <template>
     <div>
-        <b-navbar toggleable='lg' type="dark" variant="success">
+        <b-navbar toggleable='lg' type="dark" variant="dark">
             <b-navbar-brand @click="goHome" href="#">
-                <b-icon-brightness-fill-high></b-icon-brightness-fill-high>
-            Ecommerce            
+                <b-icon-shop></b-icon-shop>
+            TBF Shop            
             </b-navbar-brand>
-            <b-navbar-toogle target="nav-collapse"></b-navbar-toogle>
+            <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item @click="gotocart" active> Carrito </b-nav-item>
 
-                    <b-navbar-item-dropdown right>
+                    <b-nav-item-dropdown right>
                         <template v-slot:button-content>
-                            <em>admin</em>
+                            <em>Admin</em>
                         </template>
                         <b-dropdown-item v-b-modal.modal-1>sign in</b-dropdown-item>
-                    </b-navbar-item-dropdown>
+                    </b-nav-item-dropdown>
                 </b-navbar-nav>
             </b-collapse>
         </b-navbar>
 
         <div>
-            <b-modal hide-footer ref="my-modal" id="modal-1" title="admin">
-                <b-form @submit="onSumbit">
+            <b-modal hide-footer ref="my-modal" id="modal-1" title="Admin">
+                <b-form @submit="onSubmit">
                     <b-form-group
                         id= "input-group-1"
-                        label="user:"
+                        label="User:"
                         label-for= "input-1"
                     >
                         <b-form-input
@@ -38,7 +38,7 @@
                         </b-form-input>
                     </b-form-group>
 
-                                        <b-form-group
+                    <b-form-group
                         id= "input-group-2"
                         label="Password:"
                         label-for= "input-2"
@@ -52,7 +52,7 @@
                         </b-form-input>
                     </b-form-group>
 
-                    <b-button type="sumbit" block variant="primary"> enviar </b-button>
+                    <b-button type="submit" block variant="success"> Enviar </b-button>
                 </b-form>
             </b-modal>
         </div>
@@ -78,17 +78,17 @@ export default {
         }
     },
     methods:{
-        gotocar(){
-            
+        gotocart(){
+            this.$router.push('/cart')
         },
         goHome(){
-
+            this.$router.push('/')
         },
         onSubmit(e){
             e.preventDefault();
             if(this.form.user=='admin' && this.form.pass=='123456'){
                 this.$refs['my-modal'].hide()
-                //this.$router.push(/admin)
+                this.$router.push('/admin')
                 localStorage.setItem('admin',JSON.stringify('true'))
             }else{
                 return false;
